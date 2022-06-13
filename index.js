@@ -7,8 +7,21 @@ h = canvas.height = 720;
 ctx.fillRect(0, 0, w, h);
 
 const background = new Sprite({
-    position: { x: 0, y: 0}, 
+    position: {
+        x: 0,
+        y: 0
+    }, 
     imageSrc: './img/background.png'
+});
+
+const shop = new Sprite({
+    position: {
+        x: 720,
+        y: 272
+    }, 
+    imageSrc: './img/shop.png',
+    scale: 2.75,
+    framesMax: 6
 });
 
 const player = new Fighter({
@@ -65,6 +78,8 @@ function animate() {
     ctx.fillRect(0, 0, w, h);
 
     background.update();
+    shop.update();
+
     player.update();
     enemy.update();
 
