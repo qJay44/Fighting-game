@@ -29,21 +29,13 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    velocity: {
-        x: 0,
-        y: 0
-    },
-    offset: {
-        x: 0,
-        y: 0
-    },
-    imageSrc: './img/samuraiMack/Idle.png',
-    framesMax: 8,
-    scale: 2.5,
     offset: {
         x: 215,
         y: 155
     },
+    imageSrc: './img/samuraiMack/Idle.png',
+    framesMax: 8,
+    scale: 2.5,
     sprites: {
         idle: {
             imageSrc: './img/samuraiMack/Idle.png',
@@ -64,6 +56,10 @@ const player = new Fighter({
         attack1: {
             imageSrc: './img/samuraiMack/Attack1.png',
             framesMax: 6,
+        },
+        takeHit: {
+            imageSrc: './img/samuraiMack/Take hit - white silhouette.png',
+            framesMax: 4,
         }
     },
     attackBox: {
@@ -81,22 +77,13 @@ const enemy = new Fighter({
         x: 400,
         y: 100
     },
-    velocity: {
-        x: 0,
-        y: 0
-    },
-    color: 'blue',
-    offset: {
-        x: -50,
-        y: 0
-    },
-    imageSrc: './img/kenji/Idle.png',
-    framesMax: 4,
-    scale: 2.5,
     offset: {
         x: 215,
         y: 171
     },
+    imageSrc: './img/kenji/Idle.png',
+    framesMax: 4,
+    scale: 2.5,
     sprites: {
         idle: {
             imageSrc: './img/kenji/Idle.png',
@@ -117,6 +104,10 @@ const enemy = new Fighter({
         attack1: {
             imageSrc: './img/kenji/Attack1.png',
             framesMax: 4,
+        },
+        takeHit: {
+            imageSrc: './img/kenji/Take hit.png',
+            framesMax: 3,
         }
     },
     attackBox: {
@@ -196,29 +187,28 @@ function animate() {
         enemy.switchSprite('fall');
     }
 
-    // detect for collision
+    // enemy gets hit
     if (
         rectangularCollision({
             rectangle1: player,
             rectangle2: enemy
         }) && player.isAttacking && player.framesCurrent == 4
     ) {
-        player.isAttacking = false;
-        enemy.health -= 20;
+        enemy.takeHit();
         document.querySelector('#enemy-health').style.width = enemy.health + '%';
     }
 
     // if player misses
     if (player.isAttacking && player.framesCurrent == 4) player.isAttacking = false;
 
+    // player gets hit
     if (
         rectangularCollision({
             rectangle1: enemy,
             rectangle2: player
         }) && enemy.isAttacking && enemy.framesCurrent == 2
     ) {
-        enemy.isAttacking = false;
-        player.health -= 20;
+        player.takeHit();
         document.querySelector('#player-health').style.width = player.health + '%';
     }
 
