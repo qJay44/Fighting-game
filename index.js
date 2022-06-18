@@ -107,7 +107,7 @@ window.addEventListener('keydown', (event) => {
                 player1.lastKey = 'a';
                 break;
             case 'w':
-                player1.velocity.y = -20;
+                if (player1.velocity.y == 0) player1.velocity.y = -20;
                 break;
             case ' ':
                 player1.attack();
@@ -127,7 +127,7 @@ window.addEventListener('keydown', (event) => {
                 player2.lastKey = 'ArrowLeft';
                 break;
             case 'ArrowUp':
-                player2.velocity.y = -20;
+                if (player2.velocity.y == 0) player2.velocity.y = -20;
                 break;
             case 'Shift':
                 player2.attack();

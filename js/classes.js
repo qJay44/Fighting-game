@@ -113,6 +113,12 @@ class Fighter extends Sprite {
             this.velocity.y = 0;
             this.position.y = 475;
         } else this.velocity.y += Fighter.gravity;
+
+        if (this.position.x + this.velocity.x <= 0) {
+            this.position.x = 0;
+        } else if (this.position.x + this.width + this.velocity.x >= w) {
+            this.position.x = w - this.width;
+        }
     }
 
     switchSprite(sprite) {
