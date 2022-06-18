@@ -154,6 +154,9 @@ function animate() {
     background.update();
     shop.update();
 
+    ctx.fillStyle = 'hsla(0, 100%, 100%, 0.1)';
+    ctx.fillRect(0, 0, w, h);
+
     player.update();
     enemy.update();
 
